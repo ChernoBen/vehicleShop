@@ -44,7 +44,22 @@ describe("Vehicle test suite",()=>{
             .set({"authorization":authToken})
             .send(mainVehicle)
             .then(res=>{
+                mainVehicle._id = res.body._id;
                 expect(res.statusCode).toEqual(201);
+            })
+            .catch(error=>{
+                fail(error);
+            });
+    });
+
+    test("Should update a vehicle",()=>{
+        mainVehicle.color = `new-color-${Date.now()}`;
+        mainVehicle.price = `new-price-${Date.now()}`;
+        return request.put("/vehicle")
+            .set({"authorization":authToken})
+            .send(mainVehicle)
+            .then(res=>{
+                expect(res.statusCode).toEqual(200);
             })
             .catch(error=>{
                 fail(error);
