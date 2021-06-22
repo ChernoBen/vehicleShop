@@ -1,4 +1,4 @@
-O Sistema precisa ser capaz de:
+O Sistema é capaz de:
 
 - Cadastrar a compra de um veículo, modelo, marca, ano de fabricação, placa, cor, chassi, data da compra e valor da compra.
 
