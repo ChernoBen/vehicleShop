@@ -71,13 +71,32 @@ class VehicleController {
             if (!req.body[key]) delete body[key];
         }
         await Vehicle.findByIdAndUpdate(
-            { _id: req.body._id},
+            { _id: req.body._id },
             { ...body },
             { new: true },
             (err, vehicle) => {
                 if (err) return res.status(500);
                 return res.json(vehicle);
             });
+    }
+
+    async get(req, res) {
+        let query = {
+            model: req.query.model,
+            color: req.query.color,
+            brand: req.query.brand,
+            licensePlate: req.query.licensePlate,
+            year: req.query.year
+        } = req.query;
+        for (var [key, value] of Object.entries(query)) {
+            if (!req.query[key]) delete query[key];
+        }
+        if (req.query.model == undefined || req.query.model == "") {
+            let result = await Vehicle.find();
+            return res.status(200).json(result);
+        }
+        let vehicle = await Vehicle.find({ ...query });
+        return res.status(200).json(vehicle);
     }
 };
 module.exports = new VehicleController();
