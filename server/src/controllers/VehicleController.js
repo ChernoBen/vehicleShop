@@ -41,13 +41,43 @@ class VehicleController {
                     price
                 });
                 await newVehicle.save();
-                return res.status(201).json({ newVehicle });
+                return res.status(201).json(newVehicle);
             } catch (error) {
                 return res.status(500).json({ message: "Internal error ." });
             }
         } else {
             return res.status(401).json({ message: "Unauthorized ." })
         }
+    }
+
+    async update(req, res) {
+        if (!req.headers["authorization"]) return res.status(401).json({ message: "Unauthorized ." });
+        let token = req.headers["authorization"];
+        token = token.split(" ");
+        try {
+            let decoded = jwt.verify(token[1], secret);
+            if (!decoded.id) return res.status(401).json({ message: "Unauthorized ." });
+        } catch (error) {
+            return res.status(500).json({ message: "Internal error ." })
+        }
+        let body = {
+            model: req.body.model,
+            brand: req.body.brand,
+            licensePlate: req.body.licensePlate,
+            color: req.body.color,
+            price: req.body.price
+        };
+        for (var [key, value] of Object.entries(body)) {
+            if (!req.body[key]) delete body[key];
+        }
+        await Vehicle.findByIdAndUpdate(
+            { _id: req.body._id},
+            { ...body },
+            { new: true },
+            (err, vehicle) => {
+                if (err) return res.status(500);
+                return res.json(vehicle);
+            });
     }
 };
 module.exports = new VehicleController();
