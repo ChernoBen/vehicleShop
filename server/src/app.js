@@ -12,4 +12,5 @@ router.post("/user",UserController.create);
 router.post("/auth",UserController.auth);
 //vehicle
 router.post("/vehicle",VehicleController.create);
+router.put("/vehicle",VehicleController.update);
 module.exports = router;
