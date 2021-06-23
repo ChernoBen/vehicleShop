@@ -18,7 +18,7 @@ const mainUser = {
 let authToken = "";
 let vehicle = "";
 let seller = "";
-
+let saleId = "";
 beforeAll(() => {
     return request.post("/user")
         .send(mainUser)
@@ -50,6 +50,7 @@ describe("Sales test suite",()=>{
                                 date:Date.now()
                             })
                             .then(res=>{
+                                saleId = res.body._id;
                                 expect(res.statusCode).toEqual(201);
                             })
                             .catch(error=>{
@@ -59,6 +60,22 @@ describe("Sales test suite",()=>{
                     .catch(error=>{
                         fail(error);
                     });
+            })
+            .catch(error=>{
+                fail(error);
+            });
+    });
+
+    test("Should list all sales",()=>{
+        return request.get("/sales")
+            .query({
+                vehicleId:vehicle._id,
+                seller:seller._id,
+                price:vehicle.price,
+                _id:saleId
+            })
+            .then(res=>{
+                expect(res.statusCode).toEqual(200);
             })
             .catch(error=>{
                 fail(error);
