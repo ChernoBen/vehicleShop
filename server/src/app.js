@@ -22,4 +22,5 @@ router.put("/seller",SellerController.update);
 router.get("/seller",SellerController.get);
 //sales
 router.post("/sales",SalesController.create);
+router.get("/sales",SalesController.get);
 module.exports = router;
