@@ -18,4 +18,5 @@ router.get("/vehicle",VehicleController.get);
 //seller
 router.post("/seller",SellerController.create);
 router.put("/seller",SellerController.update);
+router.get("/seller",SellerController.get);
 module.exports = router;
