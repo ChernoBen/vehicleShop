@@ -5,7 +5,6 @@ const secret = keys.secret;
 
 class SalesController{
     async create(req,res){
-        console.log(req.body)
         if (req.headers["authorization"]) {
             const {vehicleId,seller,price,date} = req.body;
             if (!date || !vehicleId || !seller || !price) {
@@ -34,6 +33,24 @@ class SalesController{
         } else {
             return res.status(401).json({ message: "Unauthorized ." });
         }
+    }
+
+    async get(req,res){
+        if (req.query == undefined || req.query == ""){
+            let result = await Sales.find();
+            return res.status(200).json(result);
+        }
+        let query = {
+            vehicleId: req.query.vehicleId,
+            seller:req.body.seller,
+            _id:req.query._id
+        } = req.query;
+        for (var [key, value] of Object.entries(query)) {
+            if (!req.query[key]) delete query[key];
+        }
+        let results = await Sales.find({ ...query});
+        if (!results) return res.status(404).json([]);
+        return res.json(results);
     }
 };
 module.exports = new SalesController();
