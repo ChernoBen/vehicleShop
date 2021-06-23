@@ -68,7 +68,7 @@ class SellerController {
         }
         let query = {
             name: req.query.name,
-            _id:req.query.id
+            _id:req.query._id
         } = req.query;
         for (var [key, value] of Object.entries(query)) {
             if (!req.query[key]) delete query[key];
