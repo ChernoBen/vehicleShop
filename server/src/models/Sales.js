@@ -15,3 +15,5 @@ const SalesSchema = new mongoose.Schema({
     },
     commission:String
 });
+const Sales = mongoose.model("Sales",SalesSchema);
+module.exports = Sales;
