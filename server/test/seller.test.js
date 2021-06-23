@@ -61,4 +61,15 @@ describe("Seller test suite",()=>{
             });
     });
 
+    test("Should list all sellers",()=>{
+        return request.get("/seller")
+            .query({name:""})
+            .then(res=>{
+                expect(res.statusCode).toEqual(200);
+            })
+            .catch(error=>{
+                fail(error);
+            });
+    });
+
 });
