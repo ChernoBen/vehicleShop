@@ -60,5 +60,22 @@ class SellerController {
                 });
             });
     }
+
+    async get(req,res){
+        if (req.query == undefined || req.query == ""){
+            let result = await Seller.find();
+            return res.status(200).json(result);
+        }
+        let query = {
+            name: req.query.name,
+            _id:req.query.id
+        } = req.query;
+        for (var [key, value] of Object.entries(query)) {
+            if (!req.query[key]) delete query[key];
+        }
+        let results = await Seller.find({ ...query});
+        if (!results) return res.status(404).json([]);
+        return res.json(results);
+    }
 };
 module.exports = new SellerController();
