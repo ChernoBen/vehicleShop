@@ -3,6 +3,7 @@ const router = express.Router();
 const UserController = require("./controllers/UserController");
 const VehicleController = require("./controllers/VehicleController");
 const SellerController = require("./controllers/SellerController");
+const SalesController = require("./controllers/SalesController");
 
 router.use((req,res,next)=>{
     next();
@@ -19,4 +20,6 @@ router.get("/vehicle",VehicleController.get);
 router.post("/seller",SellerController.create);
 router.put("/seller",SellerController.update);
 router.get("/seller",SellerController.get);
+//sales
+router.post("/sales",SalesController.create);
 module.exports = router;
