@@ -23,7 +23,12 @@ class SalesController{
             try {
                 const decoded = jwt.verify(tk, secret);
                 if (!decoded.id) return res.status(401).json({ message: "Unauthorized ." });
-                let commission = (parseInt(price) * 10)/100;
+                let commission = "";
+                try{
+                    commission = (parseInt(price) * 10)/100;
+                }catch(error){
+                    return res.status(400).json({"message":"Price is not a number"});
+                }
                 const newSale = new Sales({vehicleId,seller,price,date,commission});
                 await newSale.save();
                 return res.status(201).json(newSale);

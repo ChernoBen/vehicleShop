@@ -8,7 +8,7 @@ const swaggerFile = require("./swagger_output.json");
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
-app.use(cors());
+app.use(cors("*"));
 const options = {
 	customCss: ".swagger-ui .topbar { display: none }",
 	customSiteTitle: "CarShop",
