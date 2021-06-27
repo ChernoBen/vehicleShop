@@ -46,7 +46,7 @@ class VehicleController {
                 return res.status(500).json({ message: "Internal error ." });
             }
         } else {
-            return res.status(401).json({ message: "Unauthorized ." })
+            return res.status(401).json({ message: "Unauthorized ." });
         }
     }
 
@@ -58,7 +58,7 @@ class VehicleController {
             let decoded = jwt.verify(token[1], secret);
             if (!decoded.id) return res.status(401).json({ message: "Unauthorized ." });
         } catch (error) {
-            return res.status(500).json({ message: "Internal error ." })
+            return res.status(500).json({ message: "Internal error ." });
         }
         let body = {
             model: req.body.model,

@@ -70,7 +70,6 @@ describe("Vehicle test suite",()=>{
         return request.get("/vehicle")
             .query({model:mainVehicle.model})
             .then(res=>{
-                console.log(res.body);
                 expect(res.statusCode).toEqual(200);
             })
             .catch(error=>{

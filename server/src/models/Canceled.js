@@ -1,6 +1,10 @@
 const mongoose = require("../database");
-
-const SalesSchema = new mongoose.Schema({
+const CanceledSchema = new mongoose.Schema({
+    saleId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Sales",
+        required:true
+    },
     date: String,
     price: String,
     vehicleId: {
@@ -15,5 +19,5 @@ const SalesSchema = new mongoose.Schema({
     },
     commission:String
 });
-const Sales = mongoose.model("Sales",SalesSchema);
-module.exports = Sales;
+const Canceled = mongoose.model("Canceled",CanceledSchema);
+module.exports = Canceled;

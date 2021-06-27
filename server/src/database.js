@@ -1,9 +1,6 @@
 const keys = require("../keys");
 const mongoose =  require("mongoose");
-mongoose.connect("mongodb://localhost:27017/carshop",{userNewUrlParser: true,useUnifiedTopology:true})
-    .then(()=>{
-        console.log("server running")
-    })
+mongoose.connect(`mongodb://${keys.mgHost}:${keys.mgPort}/${keys.mgDatabase}`,{ useNewUrlParser: true, useUnifiedTopology: true })
     .catch(error=>{
         console.log(error)
     })
