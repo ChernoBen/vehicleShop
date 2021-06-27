@@ -7,6 +7,18 @@ const User = require("../models/User");
 
 
 class UserController{
+    async verify(req,res){
+        if (!req.headers["authorization"]) return res.status(401).json({ status:false });
+        let token = req.headers["authorization"];
+        token = token.split(" ");
+        try {
+            let decoded = jwt.verify(token[1], secret);
+            if (!decoded.id) return res.status(401).json({ status:false });
+            return res.status(200).json({status:true});
+        } catch (error) {
+            return res.status(500).json({ status:false });
+        }
+    }
     async create(req,res){
         const {name,email,password} = req.body;
         if (name == "" || email == "" || password == "") return res.status(400).json({message:"Field could not be blank ."});
