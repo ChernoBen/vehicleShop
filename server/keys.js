@@ -6,3 +6,11 @@ module.exports = {
     mgPassword: process.env.ME_CONFIG_MONGODB_ADMINPASSWORD,
     mgPort: process.env.ME_CONFIG_MONGODB_PORT
 };
+// module.exports = {
+//     apiPort:"3000",
+//     secret:"jhkshdkjsdkjh",
+//     mgHost: "localhost",
+//     mgDatabase: "vehicle",
+//     mgPassword: process.env.ME_CONFIG_MONGODB_ADMINPASSWORD,
+//     mgPort: "27017"
+// };
